@@ -1,5 +1,5 @@
-const { makeExecutableSchema } = require('graphql-tools')
-const resolvers = require('./resolvers')
+const { makeExecutableSchema } = require("graphql-tools");
+const resolvers = require("./resolvers");
 
 const typeDefs = `
 	type User {
@@ -12,18 +12,26 @@ const typeDefs = `
 		name: String
 		email: String
 	}
-	type Tickets {
-		id: String
+	
+	type Regions {
+		RegionID: String
+		RegionType: String
+		RegionName: String
+		RegionNameLong: String
+		_id: String
 	}
+
 	type Query {
 		profile: User
 		profiles: [User]
+		SearchLocations(query: String!, limit: Int!): [Regions]
 	}
+	
 	type Mutation {
 		createUser(email: String!, fullname: String, password: String!): User
 		login(email: String!, password: String!): User
 		authGithub: User
 	}
-`
+`;
 
-module.exports = makeExecutableSchema({ typeDefs, resolvers })
+module.exports = makeExecutableSchema({ typeDefs, resolvers });
